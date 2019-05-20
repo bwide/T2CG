@@ -37,6 +37,11 @@ float PI = 3.14159;
 
 Pos user;
 Pos target;
+Pos zero;
+
+float degrees(int angle) {
+    return angle * 180 / PI;
+}
 
 float radians(int angle) {
     return angle * PI / 180;
@@ -102,7 +107,7 @@ void init(void)
     glEnable(GL_DEPTH_TEST);
 	glEnable ( GL_CULL_FACE );
     
-    target.z = -5;
+    target.z = -30;
     
     // Obtem o tempo inicial
 #ifdef WIN32
@@ -276,6 +281,22 @@ void animate()
     glutPostRedisplay();
 }
 
+Pos subtractPoints(Pos x, Pos y) {
+    Pos ans;
+    ans.x = x.x - y.x;
+    ans.y = x.y - y.y;
+    ans.z = x.z - y.z;
+    return ans;
+}
+
+Pos sum(Pos x, Pos y) {
+    Pos ans;
+    ans.x = x.x + y.x;
+    ans.y = x.y + y.y;
+    ans.z = x.z + y.z;
+    return ans;
+}
+
 // **********************************************************************
 //  void keyboard ( unsigned char key, int x, int y )
 //
@@ -283,55 +304,74 @@ void animate()
 // **********************************************************************
 void keyboard ( unsigned char key, int x, int y )  
 {
-    cout << user.x << user.y << user.z << endl;
-    cout << target.x << target.y << target.z << endl;
+    cout << "Obs: " << user.x << " " << user.y << " " << user.z << endl;
+    cout << "Target:" << target.x << " " << target.y << " " << target.z << " " << endl;
     cout << user.alpha << endl;
     
-    int difX = target.x - user.x;
-    int difY = target.y - user.y;
-    int difZ = target.z - user.z;
+    
+    int difX = (target.x - user.x) * 0.2;
+    int difY = (target.y - user.y) * 0.2;
+    int difZ = (target.z - user.z) * 0.2;
+    
+    Pos VETOR_ALVO;
+    Pos NOVO_ALVO;
+    
+    int ALPHA_RADIANS;
+    
 	switch ( key ) 
 	{
     case 27:        // Termina o programa qdo
         exit ( 0 );   // a tecla ESC for pressionada
         break;
     case 'w':
-//        PosicaoNova = PosicaoAtual + VetorAlvoUnitario * TamanhoDoPasso
-//        AlvoNovo = AlvoAtual + + VetorAlvoUnitario * TamanhoDoPasso
-        
         user.x = user.x + difX;
         user.y = user.y + difY;
-        user.z = user.z + difZ;
+        user.z = user.z + difZ + 1;
         
         target.x = target.x + difX;
         target.y = target.y + difY;
-        target.z = target.z + difZ;
-        PosicUser();
+        target.z = target.z + difZ + 1;
+            
+        glutPostRedisplay();
         break;
     case 's':
         user.x = user.x - difX;
         user.y = user.y - difY;
-        user.z = user.z - difZ;
+        user.z = user.z - difZ - 1;
         
         target.x = target.x - difX;
         target.y = target.y - difY;
-        target.z = target.z - difZ;
-        PosicUser();
+        target.z = target.z - difZ - 1;
+        
+        glutPostRedisplay();
         break;
     case 'd':
-        user.alpha = (user.alpha-5) % 360;
-//        AlvoNovo.X = AlvoAtual.X*cos(alfa) + AlvoAtual.Z*sen(alfa)
-//        AlvoNovo.Y =  AlvoAtual.Y
-//        AlvoNovo.Z = -AlvoAtual.X*sen(alfa) + AlvoAtual.Z*cos(alfa)
-        target.x = target.x*cos(radians(user.alpha)) + target.z*sin(radians(user.alpha));
-        target.z = -target.x*cos(radians(user.alpha)) + target.z*cos(radians(user.alpha));
-        PosicUser();
+        VETOR_ALVO = subtractPoints(target, user);
+        
+        user.alpha = (user.alpha-57) % 360;
+        ALPHA_RADIANS = user.alpha;
+            
+        NOVO_ALVO.x = VETOR_ALVO.x*cos(ALPHA_RADIANS) + VETOR_ALVO.z*sin(ALPHA_RADIANS);
+        NOVO_ALVO.y = VETOR_ALVO.y;
+        NOVO_ALVO.z = VETOR_ALVO.x*cos(ALPHA_RADIANS) + VETOR_ALVO.z*cos(ALPHA_RADIANS);
+            
+        target = sum(user, NOVO_ALVO);
+            
+        glutPostRedisplay();
         break;
     case 'a':
-        user.alpha = (user.alpha+5) % 360;
-        target.x = -target.x*cos(radians(user.alpha)) + target.z*sin(radians(user.alpha));
-        target.z = target.x*cos(radians(user.alpha)) + target.z*cos(radians(user.alpha));
-        PosicUser();
+        VETOR_ALVO = subtractPoints(target, user); // vetor obs-alvo
+            
+        user.alpha = (user.alpha+57) % 360;
+        ALPHA_RADIANS = user.alpha;
+            
+        NOVO_ALVO.x = VETOR_ALVO.x*cos(ALPHA_RADIANS) + VETOR_ALVO.z*sin(ALPHA_RADIANS);
+        NOVO_ALVO.y = VETOR_ALVO.y;
+        NOVO_ALVO.z = VETOR_ALVO.x*cos(ALPHA_RADIANS) + VETOR_ALVO.z*cos(ALPHA_RADIANS);
+            
+        target = sum(user, NOVO_ALVO);
+        
+        glutPostRedisplay();
         break;
     default:
         cout << key;
