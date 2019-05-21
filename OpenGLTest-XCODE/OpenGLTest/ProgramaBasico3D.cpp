@@ -316,66 +316,66 @@ void keyboard ( unsigned char key, int x, int y )
     Pos VETOR_ALVO;
     Pos NOVO_ALVO;
     
-    int ALPHA_RADIANS;
+    float ALPHA_RADIANS;
     
-	switch ( key ) 
-	{
-    case 27:        // Termina o programa qdo
-        exit ( 0 );   // a tecla ESC for pressionada
-        break;
-    case 'w':
-        user.x = user.x + difX;
-        user.y = user.y + difY;
-        user.z = user.z + difZ + 1;
+	switch ( key ) {
+        case 27:        // Termina o programa qdo
+            exit ( 0 );   // a tecla ESC for pressionada
+            break;
+        case 'w':
+            user.x = user.x + difX;
+            user.y = user.y + difY;
+            user.z = user.z + difZ + 1;
         
-        target.x = target.x + difX;
-        target.y = target.y + difY;
-        target.z = target.z + difZ + 1;
+            target.x = target.x + difX;
+            target.y = target.y + difY;
+            target.z = target.z + difZ + 1;
             
-        glutPostRedisplay();
-        break;
-    case 's':
-        user.x = user.x - difX;
-        user.y = user.y - difY;
-        user.z = user.z - difZ - 1;
-        
-        target.x = target.x - difX;
-        target.y = target.y - difY;
-        target.z = target.z - difZ - 1;
-        
-        glutPostRedisplay();
-        break;
-    case 'd':
-        VETOR_ALVO = subtractPoints(target, user);
-        
-        user.alpha = (user.alpha-57) % 360;
-        ALPHA_RADIANS = user.alpha;
+            glutPostRedisplay();
+            break;
+        case 's':
+            user.x = user.x - difX;
+            user.y = user.y - difY;
+            user.z = user.z - difZ - 1;
             
-        NOVO_ALVO.x = VETOR_ALVO.x*cos(ALPHA_RADIANS) + VETOR_ALVO.z*sin(ALPHA_RADIANS);
-        NOVO_ALVO.y = VETOR_ALVO.y;
-        NOVO_ALVO.z = VETOR_ALVO.x*cos(ALPHA_RADIANS) + VETOR_ALVO.z*cos(ALPHA_RADIANS);
+            target.x = target.x - difX;
+            target.y = target.y - difY;
+            target.z = target.z - difZ - 1;
             
-        target = sum(user, NOVO_ALVO);
+            glutPostRedisplay();
+            break;
+        case 'd':
+            VETOR_ALVO = subtractPoints(target, user);
             
-        glutPostRedisplay();
-        break;
-    case 'a':
-        VETOR_ALVO = subtractPoints(target, user); // vetor obs-alvo
+            user.alpha = (user.alpha+1) % 360;
+            if (user.alpha<0) { user.alpha = 360; }
+            ALPHA_RADIANS = radians(user.alpha);
             
-        user.alpha = (user.alpha+57) % 360;
-        ALPHA_RADIANS = user.alpha;
+            NOVO_ALVO.x = VETOR_ALVO.x*cos(ALPHA_RADIANS) + VETOR_ALVO.z*sin(ALPHA_RADIANS);
+            NOVO_ALVO.y = VETOR_ALVO.y;
+            NOVO_ALVO.z = -VETOR_ALVO.x*cos(ALPHA_RADIANS) + VETOR_ALVO.z*cos(ALPHA_RADIANS);
             
-        NOVO_ALVO.x = VETOR_ALVO.x*cos(ALPHA_RADIANS) + VETOR_ALVO.z*sin(ALPHA_RADIANS);
-        NOVO_ALVO.y = VETOR_ALVO.y;
-        NOVO_ALVO.z = VETOR_ALVO.x*cos(ALPHA_RADIANS) + VETOR_ALVO.z*cos(ALPHA_RADIANS);
+            target = sum(user, NOVO_ALVO);
             
-        target = sum(user, NOVO_ALVO);
-        
-        glutPostRedisplay();
-        break;
-    default:
-        cout << key;
-        break;
+            glutPostRedisplay();
+            break;
+        case 'a':
+            VETOR_ALVO = subtractPoints(target, user); // vetor obs-alvo
+            
+            user.alpha = (user.alpha-1) % 360;
+            ALPHA_RADIANS = radians(user.alpha);
+            
+            NOVO_ALVO.x = VETOR_ALVO.x*cos(ALPHA_RADIANS) + VETOR_ALVO.z*sin(ALPHA_RADIANS);
+            NOVO_ALVO.y = VETOR_ALVO.y;
+            NOVO_ALVO.z = -VETOR_ALVO.x*cos(ALPHA_RADIANS) + VETOR_ALVO.z*cos(ALPHA_RADIANS);
+            
+            target = sum(user, NOVO_ALVO);
+            
+            glutPostRedisplay();
+            break;
+        default:
+            cout << key;
+            break;
   }
 }
 
