@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		27FEB6FF22845D96003600F7 /* ProgramaBasico3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27FEB6FE22845D96003600F7 /* ProgramaBasico3D.cpp */; };
+		27A8EC2222B140F5008E724F /* SimCity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 27A8EC2122B140F5008E724F /* SimCity.cpp */; };
 		83F7D038215134D5004792C9 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83F7D037215134D5004792C9 /* GLUT.framework */; };
 		83F7D03A2151355A004792C9 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83F7D0392151355A004792C9 /* OpenGL.framework */; };
 /* End PBXBuildFile section */
@@ -25,7 +25,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		27FEB6FE22845D96003600F7 /* ProgramaBasico3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ProgramaBasico3D.cpp; sourceTree = "<group>"; };
+		27A8EC2122B140F5008E724F /* SimCity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimCity.cpp; sourceTree = "<group>"; };
+		27A8EC2422B14107008E724F /* colors.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = colors.txt; sourceTree = "<group>"; };
+		27A8EC2522B14107008E724F /* city01.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = city01.txt; sourceTree = "<group>"; };
+		27A8EC2622B1449B008E724F /* ProgramaBasico3D.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ProgramaBasico3D.cpp; sourceTree = "<group>"; };
 		83F7D02A21513410004792C9 /* OpenGLTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OpenGLTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		83F7D037215134D5004792C9 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		83F7D0392151355A004792C9 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -44,6 +47,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		27A8EC2322B14107008E724F /* objects */ = {
+			isa = PBXGroup;
+			children = (
+				27A8EC2422B14107008E724F /* colors.txt */,
+				27A8EC2522B14107008E724F /* city01.txt */,
+			);
+			path = objects;
+			sourceTree = "<group>";
+		};
 		83F7D02121513410004792C9 = {
 			isa = PBXGroup;
 			children = (
@@ -64,7 +76,9 @@
 		83F7D02C21513410004792C9 /* OpenGLTest */ = {
 			isa = PBXGroup;
 			children = (
-				27FEB6FE22845D96003600F7 /* ProgramaBasico3D.cpp */,
+				27A8EC2322B14107008E724F /* objects */,
+				27A8EC2122B140F5008E724F /* SimCity.cpp */,
+				27A8EC2622B1449B008E724F /* ProgramaBasico3D.cpp */,
 			);
 			path = OpenGLTest;
 			sourceTree = "<group>";
@@ -134,7 +148,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27FEB6FF22845D96003600F7 /* ProgramaBasico3D.cpp in Sources */,
+				27A8EC2222B140F5008E724F /* SimCity.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

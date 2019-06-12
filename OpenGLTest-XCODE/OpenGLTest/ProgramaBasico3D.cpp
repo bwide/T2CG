@@ -138,6 +138,7 @@ void PosicUser()
 			  0.0f,1.0f,0.0f);
 
 }
+
 // **********************************************************************
 //  void reshape( int w, int h )
 //		trata o redimensionamento da janela OpenGL
@@ -291,9 +292,11 @@ Pos subtractPoints(Pos x, Pos y) {
 
 Pos sum(Pos x, Pos y) {
     Pos ans;
+    
     ans.x = x.x + y.x;
     ans.y = x.y + y.y;
     ans.z = x.z + y.z;
+    
     return ans;
 }
 
@@ -347,8 +350,9 @@ void keyboard ( unsigned char key, int x, int y )
         case 'd':
             VETOR_ALVO = subtractPoints(target, user);
             
-            user.alpha = (user.alpha+1) % 360;
+            user.alpha = (user.alpha-1) % 360;
             if (user.alpha<0) { user.alpha = 360; }
+            
             ALPHA_RADIANS = radians(user.alpha);
             
             NOVO_ALVO.x = VETOR_ALVO.x*cos(ALPHA_RADIANS) + VETOR_ALVO.z*sin(ALPHA_RADIANS);
@@ -362,7 +366,7 @@ void keyboard ( unsigned char key, int x, int y )
         case 'a':
             VETOR_ALVO = subtractPoints(target, user); // vetor obs-alvo
             
-            user.alpha = (user.alpha-1) % 360;
+            user.alpha = (user.alpha+1) % 360;
             ALPHA_RADIANS = radians(user.alpha);
             
             NOVO_ALVO.x = VETOR_ALVO.x*cos(ALPHA_RADIANS) + VETOR_ALVO.z*sin(ALPHA_RADIANS);
